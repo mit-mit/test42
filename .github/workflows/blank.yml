@@ -150,7 +150,7 @@ jobs:
         channel: [master]
     steps:
       - uses: actions/checkout@v2
-      - uses: mit-mit/setup-flutter@6a23fe560e0f641c41f4de98efcd353b85351667
+      - uses: subosito/flutter-action@v1
         with:
           channel: ${{ matrix.channel }}
 
