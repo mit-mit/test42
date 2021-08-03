@@ -1,0 +1,96 @@
+name: Dart
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test1:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        channel: [stable, beta]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: mit-mit/setup-flutter@6a23fe560e0f641c41f4de98efcd353b85351667
+        with:
+          channel: ${{ matrix.channel }}
+
+      - name: Flutter test1
+        run: |
+          cd flutter1
+          flutter pub get
+          flutter test
+        
+      - name: Flutter static checks
+        run: |
+          flutter analyze
+          flutter format --set-exit-if-changed .
+         
+      - name: Dart test
+        run: |
+          cd dart1
+          dart pub get
+          dart test
+
+      - name: Flutter static checks
+        run: |
+          dart analyze
+          dart format --output=none --set-exit-if-changed .
+         
+      - name: Dart global activate + run
+        run: |
+          cd ..
+          dart pub global activate stagehand
+          mkdir testapp
+          cd testapp
+          stagehand console-simple
+          dart pub get
+          dart run
+
+  test2:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        channel: [stable, beta]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: ${{ matrix.channel }}
+
+      - name: Flutter test1
+        run: |
+          cd flutter1
+          flutter pub get
+          flutter test
+        
+      - name: Flutter static checks
+        run: |
+          flutter analyze
+          flutter format --set-exit-if-changed .
+         
+      - name: Dart test
+        run: |
+          cd dart1
+          dart pub get
+          dart test
+
+      - name: Flutter static checks
+        run: |
+          dart analyze
+          dart format --output=none --set-exit-if-changed .
+         
+      - name: Dart global activate + run
+        run: |
+          cd ..
+          dart pub global activate stagehand
+          mkdir testapp
+          cd testapp
+          stagehand console-simple
+          dart pub get
+          dart run
