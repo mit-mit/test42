@@ -27,6 +27,7 @@ jobs:
         
       - name: Flutter static checks
         run: |
+          cd flutter1
           flutter analyze
           flutter format --set-exit-if-changed .
          
@@ -38,12 +39,12 @@ jobs:
 
       - name: Flutter static checks
         run: |
+          cd dart1
           dart analyze
           dart format --output=none --set-exit-if-changed .
          
       - name: Dart global activate + run
         run: |
-          cd ..
           dart pub global activate stagehand
           mkdir testapp
           cd testapp
@@ -71,6 +72,7 @@ jobs:
         
       - name: Flutter static checks
         run: |
+          cd flutter1
           flutter analyze
           flutter format --set-exit-if-changed .
          
@@ -82,12 +84,12 @@ jobs:
 
       - name: Flutter static checks
         run: |
+          cd dart1
           dart analyze
           dart format --output=none --set-exit-if-changed .
          
       - name: Dart global activate + run
         run: |
-          cd ..
           dart pub global activate stagehand
           mkdir testapp
           cd testapp
