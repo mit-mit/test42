@@ -96,3 +96,93 @@ jobs:
           stagehand console-simple
           dart pub get
           dart run
+
+  test3:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        channel: [main]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: mit-mit/setup-flutter@6a23fe560e0f641c41f4de98efcd353b85351667
+        with:
+          channel: ${{ matrix.channel }}
+
+      - name: Flutter test1
+        run: |
+          cd flutter1
+          flutter pub get
+          flutter test
+        
+      - name: Flutter static checks
+        run: |
+          cd flutter1
+          flutter analyze
+          flutter format --set-exit-if-changed .
+         
+      - name: Dart test
+        run: |
+          cd dart1
+          dart pub get
+          dart test
+
+      - name: Flutter static checks
+        run: |
+          cd dart1
+          dart analyze
+          dart format --output=none --set-exit-if-changed .
+         
+      - name: Dart global activate + run
+        run: |
+          dart pub global activate stagehand
+          mkdir testapp
+          cd testapp
+          stagehand console-simple
+          dart pub get
+          dart run
+
+  test4:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        channel: [master]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: mit-mit/setup-flutter@6a23fe560e0f641c41f4de98efcd353b85351667
+        with:
+          channel: ${{ matrix.channel }}
+
+      - name: Flutter test1
+        run: |
+          cd flutter1
+          flutter pub get
+          flutter test
+        
+      - name: Flutter static checks
+        run: |
+          cd flutter1
+          flutter analyze
+          flutter format --set-exit-if-changed .
+         
+      - name: Dart test
+        run: |
+          cd dart1
+          dart pub get
+          dart test
+
+      - name: Flutter static checks
+        run: |
+          cd dart1
+          dart analyze
+          dart format --output=none --set-exit-if-changed .
+         
+      - name: Dart global activate + run
+        run: |
+          dart pub global activate stagehand
+          mkdir testapp
+          cd testapp
+          stagehand console-simple
+          dart pub get
+          dart run
