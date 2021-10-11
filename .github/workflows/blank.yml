@@ -19,7 +19,9 @@ jobs:
         with:
           sdk: ${{ matrix.sdk }}
       - name: Install dependencies
-        run: dart pub get
+        run: |
+          cd dart1
+          dart pub get
       - name: Print
         run: echo $DART_HOME
 
