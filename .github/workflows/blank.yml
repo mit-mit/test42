@@ -12,10 +12,10 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        sdk: [stable, beta, dev, 2.10.3, 2.12.0-29.10.beta]
+        sdk: [stable]
     steps:
       - uses: actions/checkout@v2
-      - uses: dart-lang/setup-dart@v1
+      - uses: dart-lang/setup-dart@7e4ec4f1811e09ce8f339b4d3044220ca799e6c6
         with:
           sdk: ${{ matrix.sdk }}
       - name: Install dependencies
