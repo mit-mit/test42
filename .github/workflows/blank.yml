@@ -22,8 +22,10 @@ jobs:
         run: |
           cd dart1
           dart pub get
-      - name: Print
+      - name: Print1
         run: echo $DART_HOME
+      - name: Print2
+        run: echo $GITHUB_ACTION_PATH
 
   test1:
     runs-on: ${{ matrix.os }}
