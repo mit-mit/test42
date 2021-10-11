@@ -25,7 +25,7 @@ jobs:
       - name: Print1
         run: echo $DART_HOME
       - name: Print2
-        run: echo $GITHUB_ACTION_PATH
+        run: echo $GITHUB_WORKSPACE
 
   test1:
     runs-on: ${{ matrix.os }}
